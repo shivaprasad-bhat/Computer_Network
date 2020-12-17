@@ -8,15 +8,11 @@
 
 int main(int argc, char *argv[])
 {
-
-    char _fileName[100];
     int _bytes;
     FILE *_file;
 
-    strcpy(_fileName, argv[1]);
-
-    _file = fopen(_fileName, "r");
-    fseek(_file, SEEK_SET, SEEK_END);
+    _file = fopen(argv[1], "r");
+    fseek(_file, SEEK_SET, SEEK_END); /*SEEK_SET : Start, SEEk_CUR : Current, SEK_END : End*/
     _bytes = ftell(_file);
     fclose(_file);
 

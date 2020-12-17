@@ -15,7 +15,7 @@ int main()
     _create = pipe(_pipe);
     if (_create == -1)
     {
-        perror("Failer to create a pipe\n");
+        perror("Failed to create a pipe\n");
         return 1;
     }
 

@@ -7,3 +7,4 @@
 #include <string.h>
 #include <fcntl.h>
 #include <stdbool.h>
+#include <sys/wait.h>
