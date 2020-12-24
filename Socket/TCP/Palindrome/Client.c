@@ -6,7 +6,8 @@
 #include <unistd.h>
 int main(int argc, char *argv[])
 {
-    int sock, server, res, clientData, port;
+    int sock, server, port;
+    char cdata[100], res[100];
     struct sockaddr_in saddr;
 
     // Create Socket
@@ -20,15 +21,15 @@ int main(int argc, char *argv[])
 
     connect(sock, (struct sockaddr *)&saddr, sizeof(saddr));
 
-    printf("CLIENT : Entr a number ");
-    scanf("%d", &clientData);
+    printf("CLIENT : Entr a string ");
+    scanf("%s", cdata);
 
     // Send
-    send(sock, &clientData, sizeof(clientData), 0);
+    send(sock, &cdata, sizeof(cdata), 0);
 
     // Recieve
     recv(sock, &res, sizeof(res), 0);
-    printf("CLIENT : Result received from Server %d\n", res);
+    printf("CLIENT : Result received from Server %s\n", res);
 
     return 0;
 }

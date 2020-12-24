@@ -4,11 +4,12 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <string.h>
 
 int main(int argc, char *argv[])
 {
-    int port, sock, client;
-    int clientData, res;
+    int port, sock, client, i, n;
+    char cdata[100], rev[100];
     struct sockaddr_in sadd, cadd;
 
     // Create a socket
@@ -29,13 +30,21 @@ int main(int argc, char *argv[])
     int cl = sizeof(cadd);
     client = accept(sock, (struct sockaddr *)&cadd, &cl); // Block mode
 
-    recv(client, &clientData, sizeof(clientData), 0);
-    printf("SERVER : data received from Client %d\n", clientData);
+    recv(client, &cdata, sizeof(cdata), 0);
+    printf("SERVER : data received from Client %s\n", cdata);
 
     // Logic for processing
-    res = clientData + 100;
-    send(client, &res, sizeof(res), 0);
-    printf("SERVER : result %d\n", res);
+    n = strlen(cdata);
+    int x = 0;
+    for (i = n - 1; i >= 0; i--)
+    {
+        rev[x] = cdata[i];
+        x++;
+    }
+    rev[x] = '\0';
+
+    send(client, &rev, sizeof(rev), 0);
+    printf("SERVER : result %s\n", rev);
 
     return 0;
 }
